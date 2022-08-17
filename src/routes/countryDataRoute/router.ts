@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from "express";
 import rateLimiterMiddleware from "../../middleware/rateLimiter";
 import { getCountryReportHandler } from "../../controller/CountryReport";
 import { loadData } from "../../controller/loadDatabase"

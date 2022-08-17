@@ -1,4 +1,4 @@
-import express from 'express';
+import  * as express from 'express';
 import {Request, Response} from 'express';
 import CountryDataRouter from './countryDataRoute/router';
 import rateLimiterMiddleware  from '../middleware/rateLimiter';
