@@ -19,6 +19,14 @@ export const findOneReport = async (
  return Report.findOne(query, {}, options);
 }
 
+
+export const findReports = async ( 
+  query: FilterQuery<ReportDocument>,
+  options: QueryOptions = { lean: true } 
+) => {  
+return Report.find(query, {}, options);
+}
+
 export const findAllReports = async () => {
     return Report.find({});
 }
