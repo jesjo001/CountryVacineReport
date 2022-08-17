@@ -113,25 +113,25 @@ export const getCountryReportHandler = async (req: Request, res: Response) => {
                     $gte: dateFrom,
                     $lte : dateTo
                 }
-            }, { sort: { weekStart : 1 }, limit: rangeSize })
+            }, { sort: { weekStart : 1 }, limit: rangeSize });
 
         if(!generatedReport){
             return res.status(404).json({
                 status: 404,
                 message: "No report found"
-            })
+            });
         }
 
         return res.status(200).json({
             status:200,
             report: generatedReport
-        })
+        });
 
     } catch (error) {
-        log.error(error as string)
+        log.error(error as string);
         return res.status(500).json({
             message: "Ops something went wrong. Try again latter!!@"
-        })
+        });
     }
 }
 
@@ -141,24 +141,24 @@ export const createReportHandler = async (req: Request, res: Response) => {
         //Todo: Check if doc exist, if so return eroor message 
         
         //if no doc exist insert into db
-        const createNewReport = await createReport(req.body)
+        const createNewReport = await createReport(req.body);
 
         if(!createNewReport){
             return res.status(404).json({
                 status: 404,
                 message: "No report found"
-            })
+            });
         }
 
         return res.status(200).json({
             status:200,
             report: createNewReport
-        })
+        });
 
     } catch (error) {
-        log.error(error as string)
+        log.error(error as string);
         return res.status(500).json({
             message: "Ops something went wrong. Try again latter!!@"
-        })
+        });
     }
 }

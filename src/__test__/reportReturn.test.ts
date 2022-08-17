@@ -47,24 +47,29 @@ describe("reports ", () => {
   beforeEach(async () => {
     const mongoServer = await MongoMemoryServer.create();
     await mongoose.connect(mongoServer.getUri());
-  })
+  });
 
   afterEach(async () => {
     await mongoose.disconnect();
     await mongoose.connection.close();
-  })
+  });
 
-    describe("given all query params is provided", () => {
-      it("should return 200 and empty body provided all query parameters are provided and no data exist in db", async ()=> {
-        jest.setTimeout(30000);
+  describe("given all query params is provided", () => {
+    it("should return 200 and empty body provided all query parameters are provided and no data exist in db", async ()=> {
+       jest.setTimeout(30000);
         
-        const dateFrom = "2021-W10"
-        const country = "AT";
-        const dateTo = "2021-W20"
-        const rangeSize = 5
-        const sortDate = "NumberDosesReceived"
+       const dateFrom = "2021-W10";
+       const country = "AT";
+       const dateTo = "2021-W20";
+       const rangeSize = 5;
+       const sortDate = "NumberDosesReceived";
 
-        const reportBody = {"report": {"summary": []}, "status": 200}
+       const reportBody = {
+          "report": {
+            "summary": []
+          }, 
+          "status": 200 
+        };
    
         const {statusCode, body} = await supertest(app).get(`/api/v1/report/vaccine-summary?c=${country}&dateFrom=${dateFrom}&dateTo=${dateTo}&rangeSize=${rangeSize}&sort=${sortDate}`)
 

@@ -5,10 +5,10 @@ import {
     validate,
     queryParamsValidationRules,
     reportValidationRules,
- } from '../../middleware/validation/validator'
+ } from '../../middleware/validation/validator';
 
 const CountryDataRouter = express.Router();
 
-CountryDataRouter.use(rateLimiterMiddleware)
-CountryDataRouter.get('/vaccine-summary', queryParamsValidationRules(), validate, getAgregateCountryReportHandler)
-export default CountryDataRouter
+CountryDataRouter.use(rateLimiterMiddleware);
+CountryDataRouter.get('/vaccine-summary', queryParamsValidationRules(), validate, getAgregateCountryReportHandler);
+export default CountryDataRouter;

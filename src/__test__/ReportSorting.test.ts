@@ -2,7 +2,7 @@ import * as supertest from 'supertest';
 import createServer from '../utils/server';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import { createReport, findAllReports, aggregateReport } from "../service/countryService"
+import { createReport, findAllReports, aggregateReport } from "../service/countryService";
 
 const app = createServer();
 
@@ -22,7 +22,7 @@ const newReport = {
     "TargetGroup": "ALL",
     "Vaccine": "JANSS",
     "Denominator": 7388778
-}
+};
 
 const secondReport = {
     "YearWeekISO": "2020-W60",
@@ -47,19 +47,20 @@ describe("reports ", () => {
   beforeEach(async () => {
     const mongoServer = await MongoMemoryServer.create();
     await mongoose.connect(mongoServer.getUri());
-  })
+  });
 
   afterEach(async () => {
     await mongoose.disconnect();
     await mongoose.connection.close();
-  })
+  });
 
   describe("given the report exists ", () => {
     it("should sort by weekStart", async ()=> {
         jest.setTimeout(30000);
-        const report = await createReport(newReport)
-        const secondreport = await createReport(newReport)
-        const thirdRep = await createReport(secondReport)
+
+        const report = await createReport(newReport);
+        const secondreport = await createReport(newReport);
+        const thirdRep = await createReport(secondReport);
 
         const response = {
             "report": {
@@ -76,9 +77,9 @@ describe("reports ", () => {
                 ]
             }, 
             "status": 200
-        }
+        };
 
-        const {statusCode, body} = await supertest(app).get(`/api/v1/report/vaccine-summary?c=${newReport.ReportingCountry}&dateFrom=${newReport.YearWeekISO}&dateTo=2020-W70&rangeSize=${5}&sort=weekStart`)
+        const {statusCode, body} = await supertest(app).get(`/api/v1/report/vaccine-summary?c=${newReport.ReportingCountry}&dateFrom=${newReport.YearWeekISO}&dateTo=2020-W70&rangeSize=${5}&sort=weekStart`);
   
         expect(statusCode).toBe(200);
         expect(body).toStrictEqual(response);

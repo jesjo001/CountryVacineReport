@@ -11,11 +11,11 @@ function connect(){
     useUnifiedTopology: true,
     } as ConnectOptions)
     .then(() =>{
-        log.info("Database connected")
+        log.info("Database connected");
     })
     .catch((err) =>{
         log.error("Database Error: ", err);
-        process.exit(1)
+        process.exit(1);
     })
 }
 
