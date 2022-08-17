@@ -96,21 +96,36 @@ export const getAgregateCountryReportHandler = async (req: Request, res: Respons
 }
 
 
-
+//example of how to implement a get handler without aggregation
 export const getCountryReportHandler = async (req: Request, res: Response) => {
     try {
 
-    const dateFrom = get(req, "query.dateFrom");
-    const country = get(req, "query.c");
-    const dateTo = get(req, "query.dateTo");
-    const rangeSize = get(req, "query.rangeSize");
-    const sort = get(req, "query.sort");
+        const dateFrom = get(req, "query.dateFrom");
+        const country = get(req, "query.c");
+        const dateTo = get(req, "query.dateTo");
+        const rangeSize = get(req, "query.rangeSize");
+        const sortDate = get(req, "query.sort");
+          
+        const generatedReport = await findReports({
+                ReportingCountry: country,
+                YearWeekISO: {
+                    $gte: dateFrom,
+                    $lte : dateTo
+                }
+            }, { sort: { weekStart : 1 }, limit: rangeSize })
 
-        // console.log(req.query)
-        // log.info(` from ${dateFrom} to ${dateTo} country ${country}
-        // rangeSize ${rangeSize} sort ${sort}`)
+        if(!generatedReport){
+            return res.status(404).json({
+                status: 404,
+                message: "No report found"
+            })
+        }
 
-        res.send(200)
+        return res.status(200).json({
+            status:200,
+            report: generatedReport
+        })
+        
     } catch (error) {
         log.error(error as string)
         return res.status(500).json({
@@ -118,3 +133,4 @@ export const getCountryReportHandler = async (req: Request, res: Response) => {
         })
     }
 }
+
