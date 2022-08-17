@@ -22,7 +22,7 @@ describe("reports route test", () => {
         jest.setTimeout(30000);
         await supertest(app).get('/api/v1/report/vaccine-summaarry')
         .expect(404);
-      })
+      });
     });
 
     describe("given a queryparams is missing", () => {
@@ -41,7 +41,7 @@ describe("reports route test", () => {
         expect(statusCode).toBe(422);
         expect(body.errors[0].rangeSize).toBe(error);
       })
-    })
+    });
 
     describe("Should rate Limit when route is hit", () => {
       it("should return 429 provided provided rate limit is reached", async ()=> {

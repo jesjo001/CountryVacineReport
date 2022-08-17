@@ -6,7 +6,7 @@ import { getCountryReportHandler } from '../controller/CountryReport';
 
 const Route = express.Router();
 
-Route.use('/healthcheck', (req: Request, res: Response) => res.sendStatus(200))
+Route.use('/healthcheck', (req: Request, res: Response) => res.sendStatus(200));
 
 
 Route.use('/report', rateLimiterMiddleware, CountryDataRouter);
