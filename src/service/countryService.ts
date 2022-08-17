@@ -19,6 +19,11 @@ export const findOneReport = async (
  return Report.findOne(query, {}, options);
 }
 
+export const aggregateReport = async ( 
+  pipelines: FilterQuery<Array<Object>>,
+) => {  
+return Report.aggregate([...pipelines])
+}
 
 export const findReports = async ( 
   query: FilterQuery<ReportDocument>,

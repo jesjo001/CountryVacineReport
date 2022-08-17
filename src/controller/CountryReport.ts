@@ -8,7 +8,8 @@ import {
     findAndUpdate,
     findReports,
     deleteReport,
-    createReport
+    createReport,
+    aggregateReport
          } from "../service/countryService"
 
 export const getAgregateCountryReportHandler = async (req: Request, res: Response) => {
@@ -20,23 +21,21 @@ export const getAgregateCountryReportHandler = async (req: Request, res: Respons
         const dateTo = get(req, "query.dateTo");
         const rangeSize = get(req, "query.rangeSize");
         const sortDate = get(req, "query.sort");
-
-
-
-        const generatedReport = await Report.aggregate([
-                { $match: { ReportingCountry: country,
-                    YearWeekISO: {
-                        $gte: dateFrom,
-                        $lte : dateTo
-                    } }
-                },
-                { $group: { 
-                    _id: "$YearWeekISO",
-                    NumberDosesReceived: { $sum: "$NumberDosesReceived"}
-                }},
-                { $sort : { _id : 1 }}
-            ])
     
+        const generatedReport = await aggregateReport([
+            { $match: { ReportingCountry: country,
+                YearWeekISO: {
+                    $gte: dateFrom,
+                    $lte : dateTo
+                } }
+            },
+            { $group: { 
+                _id: "$YearWeekISO",
+                NumberDosesReceived: { $sum: "$NumberDosesReceived"}
+            }},
+            { $sort : { _id : 1 }}
+        ])
+
         let startRange = Number(generatedReport[0]._id.slice(-2));
         let weekStart = generatedReport[0]._id;
         let endRange = startRange + Number(rangeSize);
@@ -125,7 +124,7 @@ export const getCountryReportHandler = async (req: Request, res: Response) => {
             status:200,
             report: generatedReport
         })
-        
+
     } catch (error) {
         log.error(error as string)
         return res.status(500).json({
