@@ -1,5 +1,4 @@
 import Report, { ReportDocument } from "../models/report.model";
-import { omit } from "lodash";
 import {
   DocumentDefinition,
   FilterQuery,
@@ -7,13 +6,13 @@ import {
   QueryOptions,
 } from "mongoose";
 
-export const createCounsellor = async (
+export const createReport = async (
     input: DocumentDefinition<ReportDocument>
   ) => {
     return await Report.create(input);
   };  
 
-export const findReport = async ( 
+export const findOneReport = async ( 
     query: FilterQuery<ReportDocument>,
     options: QueryOptions = { lean: true } 
 ) => {
@@ -32,7 +31,7 @@ export const findAndUpdate = (
     return Report.findOneAndUpdate(query, update, options);
   };
   
-  export function deleteCounsellor(query: FilterQuery<ReportDocument>) {
+  export function deleteReport(query: FilterQuery<ReportDocument>) {
     return Report.deleteOne(query);
   }
   
