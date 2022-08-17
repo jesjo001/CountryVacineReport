@@ -1,4 +1,5 @@
-import mongoose, { ConnectOptions } from 'mongoose';
+import * as mongoose from 'mongoose';
+import  { ConnectOptions } from 'mongoose';
 import log from '../logger'
 
 
