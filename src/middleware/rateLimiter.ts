@@ -8,7 +8,7 @@ const opts = {
 
   const rateLimiter = new RateLimiterMemory(opts);
 
-  const rateLimiterMiddleware = (req , res, next) => {
+  const rateLimiterMiddleware = (req: Request , res: Response, next: any) => {
     const userToken = req.body.token;
     // Consume 1 point for each action
     // This
