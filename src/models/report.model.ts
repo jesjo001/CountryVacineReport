@@ -2,82 +2,82 @@ import * as mongoose from "mongoose"
 
 
 export interface ReportDocument extends mongoose.Document {
-    yearWeekISO : string,
-    firstDose: number,
-    firstDoseRefused: string,
-    secondDose : number,
-    doseAdditional1 : number,
-    doseAdditional2 : number,
-    unknownDose : number,
-    numberDosesReceived : number,
-    numberDosesExported : number,
-    region : string,
-    population : number,
-    reportingCountry : string,
-    targetGroup : string,
-    vaccine : string,
-    denominator : number
+    YearWeekISO : string,
+    FirstDose: number,
+    FirstDoseRefused: string,
+    SecondDose : number,
+    DoseAdditional1 : number,
+    DoseAdditional2 : number,
+    UnknownDose : number,
+    NumberDosesReceived : number,
+    NumberDosesExported : number,
+    Region : string,
+    Population : string,
+    ReportingCountry : string,
+    TargetGroup : string,
+    Vaccine : string,
+    Denominator : number
 }
 
 const reportSchema = new mongoose.Schema(
     {
-      yearWeekISO: {
+      YearWeekISO: {
             type: String,
             required: true,
           },
-          firstDose: {
+          FirstDose: {
             type: Number,
             required: true,
           },
-          firstDoseRefused: {
+          FirstDoseRefused: {
+            type: String,
+            required: false,
+          },
+          SecondDose: {
+            type: Number,
+            required: true,
+          },
+          DoseAdditional1: {
+            type: Number,
+            required: true,
+          },
+          DoseAdditional2: {
+            type: Number,
+            required: true,
+          },
+          UnknownDose: {
+            type: Number,
+            required: true,
+          },
+          NumberDosesReceived: {
+            type: Number,
+            required: true,
+          },
+          NumberDosesExported: {
+            type: Number,
+            required: true,
+          },
+          Region: {
             type: String,
             required: true,
           },
-          secondDose: {
-            type: Number,
-            required: true,
-          },
-          doseAdditional1: {
-            type: Number,
-            required: true,
-          },
-          doseAdditional2: {
-            type: Number,
-            required: true,
-          },
-          unknownDose: {
-            type: Number,
-            required: true,
-          },
-          numberDosesReceived: {
-            type: Number,
-            required: true,
-          },
-          numberDosesExported: {
-            type: Number,
-            required: true,
-          },
-          region: {
+          Population: {
             type: String,
             required: true,
           },
-          population: {
-            type: Number,
-            required: true,
-          },
-          reportingCountry: {
+          ReportingCountry: {
             type: String,
             required: true,
           },
-          targetGroup: {
+          TargetGroup: {
             type: String,
             required: true,
           },
-          vaccine: {
+          Vaccine: {
             type: String,
             required: true,
           },
-          denominator: {
+          Denominator: {
             type: Number,
             required: true,
           }
