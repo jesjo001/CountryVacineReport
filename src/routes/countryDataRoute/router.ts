@@ -1,8 +1,14 @@
 import * as express from "express";
 import rateLimiterMiddleware from "../../middleware/rateLimiter";
-import { getCountryReportHandler } from "../../controller/CountryReport";
-import { loadData } from "../../controller/loadDatabase"
+import { getCountryReportHandler, getAgregateCountryReportHandler } from "../../controller/CountryReport";
+import { 
+    validate,
+    queryParamsValidationRules,
+    reportValidationRules,
+ } from '../../middleware/validation/validator'
+
 const CountryDataRouter = express.Router();
 
-CountryDataRouter.get('/vaccine-summary', rateLimiterMiddleware, getCountryReportHandler)
+CountryDataRouter.use(rateLimiterMiddleware)
+CountryDataRouter.get('/vaccine-summary', queryParamsValidationRules(), validate, getAgregateCountryReportHandler)
 export default CountryDataRouter
