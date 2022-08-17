@@ -18,7 +18,7 @@ const opts = {
       next();
     })
     .catch((rejRes) => {
-      res.status(429).send(`You are currently limited to 30`);
+      res.status(429).send(`Too Many Retrys Per minute.`);
     });
   };
 
