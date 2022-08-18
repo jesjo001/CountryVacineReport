@@ -1,19 +1,19 @@
 import { RateLimiterMemory } from "rate-limiter-flexible";
 import {Request, Response} from 'express';
-const opts = {
-    points: 5, // 6 points
-    duration: 60, // Per second
+
+
+  const opts = {
+      points: 2, // 2 points
+      duration: 60, // Per Minutes
   };
-  
 
   const rateLimiter = new RateLimiterMemory(opts);
 
   const rateLimiterMiddleware = (req: Request , res: Response, next: any) => {
     const userToken = req.body.token;
+
     // Consume 1 point for each action
-    // This
-  
-    rateLimiter.consume(userToken) // or req.ip
+    rateLimiter.consume(userToken, 1) // or req.ip, This also works for ip in case token does not exist
     .then(() => {
       next();
     })
@@ -22,4 +22,4 @@ const opts = {
     });
   };
 
-export default rateLimiterMiddleware
+export default rateLimiterMiddleware;
