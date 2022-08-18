@@ -3,7 +3,7 @@ import {Request, Response} from 'express';
 
 
   const opts = {
-      points: 3, // 3 points
+      points: 2, // 2 points
       duration: 60, // Per Minutes
   };
 
